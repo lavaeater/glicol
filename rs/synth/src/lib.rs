@@ -21,20 +21,20 @@
 // SOFTWARE.
 
 #![doc = include_str!("../README.md")]
-mod context;
+pub mod context;
 pub use context::*;
 
-mod graph;
+pub mod graph;
 pub use graph::*;
 
-mod node;
+pub mod node;
 pub use node::{
     compound, delay, effect, envelope, filter, operator, oscillator, sequencer, signal, synth,
 };
 pub use node::{Input, Node};
 // pub use node::*; // TODO: Do not expose every struct here
 
-mod buffer;
+pub mod buffer;
 pub use buffer::Buffer;
 
 #[cfg(feature = "node-sampling")]

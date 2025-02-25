@@ -29,7 +29,7 @@ pub struct Engine<const N: usize> {
     pub refpairlist: Vec<(Vec<String>, String, usize)>,
     pub samples_dict: HashMap<String, (&'static [f32], usize, usize)>,
     bpm: f32,
-    sr: usize,
+    sample_rate: usize,
     track_amp: f32,
     seed: usize,
     clock: usize,
@@ -63,7 +63,7 @@ impl<const N: usize> Engine<N> {
             refpairlist: vec![],
             samples_dict: HashMap::new(),
             bpm: 120.,
-            sr: 44100,
+            sample_rate: 44100,
             track_amp: 1.0,
             seed: 42,
             clock: 0,
@@ -255,7 +255,7 @@ impl<const N: usize> Engine<N> {
                                 &nodename,
                                 paras,
                                 &self.samples_dict,
-                                self.sr,
+                                self.sample_rate,
                                 self.bpm,
                                 self.seed,
                             )?;
@@ -275,7 +275,7 @@ impl<const N: usize> Engine<N> {
                         name,
                         &mut paras,
                         &self.samples_dict,
-                        self.sr,
+                        self.sample_rate,
                         self.bpm,
                         self.seed,
                     )?;
@@ -568,7 +568,7 @@ impl<const N: usize> Engine<N> {
         }
         // if self.livecoding {
         let mut result = [0; 256];
-        let one_bar = (240.0 / self.bpm * self.sr as f32) as usize;
+        let one_bar = (240.0 / self.bpm * self.sample_rate as f32) as usize;
         let time_to_update = (self.clock + N) % one_bar <= N;
         if self.need_update && (!self.livecoding || time_to_update) {
             self.need_update = false;
@@ -602,40 +602,16 @@ impl<const N: usize> Engine<N> {
                                     negatives,
                                 } => {
                                     (positives, negatives)
-                                    // if positives.len() != 0 {
-                                    //     print!("\n\nexpecting ");
-                                    //     for possible in positives { print!("{:?} ", possible) }
-                                    //     print!("\n\n");
-                                    // }
-                                    // if negatives.len() != 0 {
-                                    //     print!("\n\nunexpected element: ");
-                                    //     for possible in negatives { print!("{:?} ", possible) }
-                                    //     print!("\n\n");
-                                    // }
                                 }
                                 _ => {
                                     panic!("unknonw parsing error")
                                 }
                             };
-                            // let linecode = v.line;
-                            // println!("{:?}", v);
                             let res = format!(
                                 "pos[{:?}], line[{:?}], col[{:?}], positives{:?}, negatives{:?}",
                                 location, line, col, positives, negatives
                             );
-                            // println!("{}", res);
                             res
-                            // match v.variant {
-                            //     pest::error::ErrorVariant::ParsingError { positives, negatives} => {
-                            //         println!("print expecting {:?} find {:?}", positives, negatives);
-                            //         // format!("format expecting {:?} find {:?}", positives, negatives);
-                            //         format!("format")
-                            //         // return (positives, negatives)
-                            //     },
-                            //     _ => {
-                            //         unimplemented!();
-                            //     }
-                            // }
                         }
                         EngineError::NonExsitSample(v) => {
                             format!("cannot use this non-exist samples {}", v)
@@ -666,18 +642,31 @@ impl<const N: usize> Engine<N> {
             result,
         )
     }
+    
+    pub fn get_bpm(&self) -> f32 {
+        self.bpm
+    }
 
     pub fn set_bpm(&mut self, bpm: f32) {
         self.bpm = bpm;
         self.context.send_msg_to_all(Message::SetBPM(bpm));
     }
-    pub fn set_sr(&mut self, sr: usize) {
-        self.sr = sr
+    pub fn set_sample_rate(&mut self, sample_rate: usize) {
+        self.sample_rate = sample_rate
     }
+    pub fn get_sample_rate(&self) -> usize {
+        self.sample_rate
+    }
+    
+    
     pub fn set_seed(&mut self, seed: usize) {
         self.seed = seed
     }
+    
     pub fn set_track_amp(&mut self, amp: f32) {
         self.track_amp = amp
+    }
+    pub fn get_track_amp(&self) -> f32 {
+        self.track_amp
     }
 }

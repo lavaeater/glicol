@@ -32,14 +32,12 @@ pub fn get_ast(code: &str) -> Result<GlicolAst, Error<Rule>> {
     let mut ast = GlicolAst::new();
     for line in lines.into_inner() {
         if line.as_rule() == Rule::line {
-            // println!("each line {:?}", line.as_str());
             let mut key = "";
             let mut chain_node_names = vec![];
             let mut chain_paras = vec![];
             for line_component in line.into_inner() {
                 match line_component.as_rule() {
                     Rule::reference => {
-                        // println!("ref {:?}", line_component.as_str());
                         key = line_component.as_str();
                     }
                     Rule::chain => {

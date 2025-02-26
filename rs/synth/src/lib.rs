@@ -22,6 +22,8 @@
 
 #![doc = include_str!("../README.md")]
 pub mod context;
+
+use std::fmt::Display;
 pub use context::*;
 
 pub mod graph;
@@ -112,4 +114,10 @@ pub enum GlicolPara {
     Bar(f32),
     Second(f32),
     Millisecond(f32),
+}
+
+impl Display for GlicolPara {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
 }

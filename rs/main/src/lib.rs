@@ -17,8 +17,8 @@ pub type GlicolNodeData<const N: usize> = NodeData<BoxedNodeSend<N>, N>;
 pub struct Engine<const N: usize> {
     pub context: AudioContext<N>,
     code: String,
-    ast: HashMap<String, (Vec<String>, Vec<Vec<GlicolPara>>)>,
-    new_ast: HashMap<String, (Vec<String>, Vec<Vec<GlicolPara>>)>,
+    pub ast: HashMap<String, (Vec<String>, Vec<Vec<GlicolPara>>)>,
+    pub new_ast: HashMap<String, (Vec<String>, Vec<Vec<GlicolPara>>)>,
     pub index_info: HashMap<String, Vec<NodeIndex>>,
     pub index_info_backup: HashMap<String, Vec<NodeIndex>>,
     temp_node_index: Vec<NodeIndex>, // created in the adding process, will be deleted if err

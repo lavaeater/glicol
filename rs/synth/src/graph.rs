@@ -48,6 +48,7 @@ where
 ///
 /// For a graph to be compatible with a graph **Processor**, its node weights must be of type
 /// `NodeData<T>`, where `T` is some type that implements the `Node` trait.
+#[derive(Clone)]
 pub struct NodeData<T: ?Sized, const N: usize> {
     pub buffers: Vec<Buffer<N>>,
     pub node: T,

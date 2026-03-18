@@ -6,7 +6,7 @@ resolver = "1"
 
 [workspace.package]
 version = "0.13.5"
-edition = "2021"
+edition = "2024"
 repository = "https://github.com/chaosprint/glicol.git"
 authors = ["Qichao Lan <chaosprint@gmail.com>"]
 

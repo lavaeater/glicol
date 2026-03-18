@@ -30,7 +30,5 @@ pest = { workspace = true }
 hashbrown = { workspace = true }
 
 [dev-dependencies]
-gnuplot = "0.0.37"
+gnuplot = "0.0.46"
 # petgraph = { version = "0.6",  features = ["stable_graph"] }
-cpal = "0.14.0"
-anyhow = "1.0.63"

@@ -45,7 +45,7 @@ impl<const N: usize> Node<N> for DelayN {
                 };
 
                 match (input.buffers(), &mut *output) {
-                    ([in_buf], [ref mut out_a, ref mut out_b]) => {
+                    (&[ref in_buf], [out_a, out_b]) => {
                         out_a.copy_from_slice(in_buf);
                         out_b.copy_from_slice(in_buf);
                     },

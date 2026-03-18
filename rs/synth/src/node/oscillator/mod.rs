@@ -25,7 +25,7 @@ fn process_oscillation<const N: usize>(
         1 => {
             let mod_input = match input_order {
                 [] => &mut *inputs.values_mut().next().unwrap(),
-                [ref first_input, ..] => &inputs[first_input],
+                [first_input, ..] => &inputs[first_input],
             };
 
             for (out, mod_buf) in output[0].iter_mut().zip(mod_input.buffers()[0].iter()) {

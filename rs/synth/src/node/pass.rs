@@ -40,7 +40,7 @@ impl<const N: usize> Node<N> for Pass {
         };
 
         match (input.buffers(), &mut *output) {
-            ([ref in_buf], [out_left, out_right]) => {
+            ([in_buf], [out_left, out_right]) => {
                 out_left.copy_from_slice(in_buf);
                 out_right.copy_from_slice(in_buf);
             }

@@ -4,7 +4,7 @@ use quote::quote;
 #[proc_macro]
 pub fn one_para_number_or_ref(item: TokenStream) -> TokenStream {
     let name = proc_macro2::TokenStream::from(item);
-    let gen = quote! {
+    let gorb = quote! {
         {
             // println!("node {:?}", node.as_str()); //"sin 440"
             let paras = node.into_inner().next().unwrap();
@@ -21,13 +21,13 @@ pub fn one_para_number_or_ref(item: TokenStream) -> TokenStream {
             }
         }
     };
-    gen.into()
+    gorb.into()
 }
 
 #[proc_macro]
 pub fn two_numbers(item: TokenStream) -> TokenStream {
     let name = proc_macro2::TokenStream::from(item);
-    let gen = quote! {
+    let gorb = quote! {
         {
             // println!("node {:?}", node.as_str());
             let mut iter = node.into_inner();
@@ -40,13 +40,13 @@ pub fn two_numbers(item: TokenStream) -> TokenStream {
             ]);
         }
     };
-    gen.into()
+    gorb.into()
 }
 
 #[proc_macro]
 pub fn get_one_para_from_number_or_ref(item: TokenStream) -> TokenStream {
     let name = proc_macro2::TokenStream::from(item);
-    let gen = quote! {
+    let gorb = quote! {
         {
             match &paras[0] {
                 GlicolPara::Number(v) => {
@@ -61,12 +61,12 @@ pub fn get_one_para_from_number_or_ref(item: TokenStream) -> TokenStream {
             }
         }
     };
-    gen.into()
+    gorb.into()
 }
 #[proc_macro]
 pub fn get_one_para_from_number_or_ref2(item: TokenStream) -> TokenStream {
     let name = proc_macro2::TokenStream::from(item);
-    let gen = quote! {
+    let gorb = quote! {
         {
             match &paras[0] {
                 GlicolPara::Number(v) => {
@@ -81,5 +81,5 @@ pub fn get_one_para_from_number_or_ref2(item: TokenStream) -> TokenStream {
             }
         }
     };
-    gen.into()
+    gorb.into()
 }

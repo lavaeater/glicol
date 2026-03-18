@@ -46,8 +46,5 @@ rhai = { workspace = true, optional = true  }
 fasteval = { workspace = true }
 
 [dev-dependencies]
-gnuplot = "0.0.37"
-criterion = "0.4.0"
-# petgraph = { version = "0.6",  features = ["stable_graph"] }
-# cpal = "0.14.0"
-# anyhow = "1.0.63"
+gnuplot = "0.0.46"
+criterion = "0.8.2"
